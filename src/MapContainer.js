@@ -4,6 +4,7 @@ import {
   GoogleApiWrapper
 } from 'google-maps-react'
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 export class MapContainer extends Component {
   render() {
@@ -27,3 +28,7 @@ export class MapContainer extends Component {
 export default GoogleApiWrapper({
   apiKey: 'AIzaSyB-Rff_nbsnhRb3jT6eqW6EWptTPCHsic4'
 })(MapContainer)
+
+MapContainer.propTypes = {
+  locations: PropTypes.array.isRequired
+}
