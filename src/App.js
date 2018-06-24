@@ -13,7 +13,12 @@ class MainPage extends Component {
 
   render() {
     return (
-      <Map locations={this.state.locations}/>
+      <div className="app">
+        <div className="sidebar"></div>
+        <div className="map">
+          <Map locations={this.state.locations} />
+        </div>
+      </div>
     )
   }
 }
