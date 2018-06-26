@@ -14,6 +14,11 @@ html, body, #root, .app {
 }
 
 
+html * {
+  font-family: "monospace", sans-serif;
+}
+
+
 .app {
   display: flex;
   flex-wrap: wrap;
@@ -22,16 +27,51 @@ html, body, #root, .app {
 
 .map {
   order: 2;
-  width: 70%;
-  height: 100%;
+  width: 100%;
   height: 100%;
 }
 
 
 .sidebar {
   order: 1;
-  min-width: 200px;
-  width: 30%;
+  width: 170px;
+  position: absolute;
+  z-index: 10;
+  transform: translateX(-170px);
+  padding: 10px;
   background-color: gray;
+  opacity: 0.92;
   height: 100%;
+}
+
+
+.sidebar-expanded {
+  transform: translateX(0px);
+}
+
+
+.places {
+  font-size: 1.2em;
+  color: #fefefe;
+  line-height: 1.6em;
+}
+
+
+.hamburger-btn {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  z-index: 15;
+  left: 10px;
+  top: 80px;
+  font-size: 2.7em;
+  font-weight: 900;
+}
+
+
+.close-sidebar {
+  float: right;
+  border: 1px solid red;
+  font-size: 1.3em;
+  padding: 5px;
 }

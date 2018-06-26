@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import Map from './MapContainer'
+import Sidebar from './Sidebar'
+import HamburgerButton from './HamburgerButton'
 
 class MainPage extends Component {
   state = {
@@ -11,10 +13,33 @@ class MainPage extends Component {
     ]
   }
 
+  componentDidMount() {
+    document.addEventListener('keyup', e => {
+      if (e.keyCode === 27) {
+        document.querySelector('#sidebar').classList.remove('sidebar-expanded')
+        document.querySelector('.hamburger-btn').style.display = 'block'
+      }
+    })
+  }
+
+  hamburgerBtnHandler = e => {
+    console.log('event works')
+    const sidebar = document.querySelector('#sidebar')
+    if (sidebar.classList.toggle('sidebar-expanded')) {
+      e.target.style.display = 'none'
+    }
+    else {
+      e.target.style.display = 'block'
+    }
+    sidebar.classList.toggle('sidebar-expanded')
+  }
+
   render() {
     return (
       <div className="app">
-        <div className="sidebar"></div>
+        <HamburgerButton onHamClick={this.hamburgerBtnHandler} />
+        <Sidebar places={this.state.locations}>
+        </Sidebar>
         <div className="map">
           <Map locations={this.state.locations} />
         </div>

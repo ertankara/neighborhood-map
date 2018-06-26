@@ -9,18 +9,18 @@ import PropTypes from 'prop-types'
 export class MapContainer extends Component {
   render() {
     return (
-      <Map
-        initialCenter={{ lat: 38.418665, lng: 27.126112, title: 'Konak' }}
-        google={this.props.google}
-        zoom={13}>
-          {this.props.locations.map(location => {
-            return (
-              <Marker key={location.title}
-                position={{ lat: location.lat, lng: location.lng}}
-                title={location.title} />
-            )
-          })}
-      </Map>
+        <Map
+          initialCenter={{ lat: 38.418665, lng: 27.126112, title: 'Konak' }}
+          google={this.props.google}
+          zoom={13}>
+            {this.props.locations.map(location => {
+              return (
+                <Marker key={location.title}
+                  position={{ lat: location.lat, lng: location.lng}}
+                  title={location.title} />
+              )
+            })}
+        </Map>
     )
   }
 }
