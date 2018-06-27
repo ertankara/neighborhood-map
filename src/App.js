@@ -12,7 +12,8 @@ class MainPage extends Component {
       { lat: 38.439018, lng: 27.141123, title: 'Alsancak' },
       { lat: 38.394222, lng: 27.057919, title: 'Balçova' },
       { lat: 38.324203, lng: 26.767730, title: 'Urla' }
-    ]
+    ],
+    query: ''
   }
 
   componentDidMount() {
@@ -48,14 +49,28 @@ class MainPage extends Component {
       .classList.remove('hamburger-btn-hidden')
   }
 
+  updateQuery = e => {
+    this.setState({
+      query: e.target.value
+    })
+  }
 
   render() {
     return (
       <div className="app">
-        <HamburgerButton onHamClick={this.hamburgerBtnHandler} />
-        <Sidebar onCloseClick={this.closeBtnHandler} places={this.state.locations} />
+        <HamburgerButton
+          onHamClick={this.hamburgerBtnHandler} />
+
+        <Sidebar
+          onCloseClick={this.closeBtnHandler}
+          places={this.state.locations}
+          currentQuery={this.state.query}
+          onQueryInput={this.updateQuery} />
+
         <div className="map">
-          <Map locations={this.state.locations} />
+          <Map
+            queryText={this.state.query}
+            locations={this.state.locations} />
         </div>
       </div>
     )

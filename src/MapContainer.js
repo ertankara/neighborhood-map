@@ -8,12 +8,18 @@ import PropTypes from 'prop-types'
 
 export class MapContainer extends Component {
   render() {
+    const reg = new RegExp(this.props.queryText.toLowerCase())
     return (
         <Map
           initialCenter={{ lat: 38.418665, lng: 27.126112, title: 'Konak' }}
           google={this.props.google}
           zoom={13}>
-            {this.props.locations.map(location => {
+          {/* First filter the ones that don't match with the query */}
+            {this.props.locations.filter(location => {
+              return reg.test(location.title.toLowerCase())
+            })
+            // Print the ones that was filtered out
+            .map(location => {
               return (
                 <Marker key={location.title}
                   position={{ lat: location.lat, lng: location.lng}}
