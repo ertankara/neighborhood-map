@@ -41,7 +41,6 @@ export class MapContainer extends Component {
         <Map
           initialCenter={{ lat: 38.418665, lng: 27.126112, title: 'Konak' }}
           google={this.props.google}
-          zoom={13}
           bounds={bound}>
           {/* First filter the ones that don't match with the query */}
             {this.props.locations.filter(location => {
@@ -54,7 +53,8 @@ export class MapContainer extends Component {
                   key={location.title}
                   position={{ lat: location.position.lat, lng: location.position.lng}}
                   title={location.title}
-                  onClick={this.onMarkerClick} />
+                  onClick={this.onMarkerClick}
+                  animation={this.props.google.maps.Animation.Fo} />
               )
             })}
             <InfoWindow marker={this.state.activeMaker} visible={this.state.showingInfoWindow}>
