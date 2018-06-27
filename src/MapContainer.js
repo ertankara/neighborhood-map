@@ -25,10 +25,10 @@ export class MapContainer extends Component {
   }
 }
 
-export default GoogleApiWrapper({
-  apiKey: 'AIzaSyB-Rff_nbsnhRb3jT6eqW6EWptTPCHsic4'
-})(MapContainer)
-
 MapContainer.propTypes = {
   locations: PropTypes.array.isRequired
 }
+
+export default GoogleApiWrapper({
+  apiKey: 'AIzaSyB-Rff_nbsnhRb3jT6eqW6EWptTPCHsic4'
+})(MapContainer)
