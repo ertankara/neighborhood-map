@@ -3,6 +3,8 @@ import Map from './MapContainer'
 import Sidebar from './Sidebar'
 import HamburgerButton from './HamburgerButton'
 
+const ESCAPE_BUTTON = 27
+
 class MainPage extends Component {
   state = {
     locations: [
@@ -15,31 +17,43 @@ class MainPage extends Component {
 
   componentDidMount() {
     document.addEventListener('keyup', e => {
-      if (e.keyCode === 27) {
-        document.querySelector('#sidebar').classList.remove('sidebar-expanded')
-        document.querySelector('.hamburger-btn').style.display = 'block'
+      e.preventDefault()
+
+      if (e.keyCode === ESCAPE_BUTTON) {
+        document.querySelector('.sidebar')
+          .classList.toggle('sidebar-expanded')
+
+        document.querySelector('.hamburger-btn')
+          .classList.toggle('hamburger-btn-hidden')
       }
     })
   }
 
+
   hamburgerBtnHandler = e => {
-    console.log('event works')
-    const sidebar = document.querySelector('#sidebar')
-    if (sidebar.classList.toggle('sidebar-expanded')) {
-      e.target.style.display = 'none'
-    }
-    else {
-      e.target.style.display = 'block'
-    }
-    sidebar.classList.toggle('sidebar-expanded')
+    // Hide hamburger button
+    e.target.classList.add('hamburger-btn-hidden')
+
+    // Display sidebar
+    document.querySelector('.sidebar')
+      .classList.add('sidebar-expanded')
   }
+
+
+  closeBtnHandler = e => {
+    document.querySelector('.sidebar')
+      .classList.remove('sidebar-expanded')
+
+    document.querySelector('.hamburger-btn')
+      .classList.remove('hamburger-btn-hidden')
+  }
+
 
   render() {
     return (
       <div className="app">
         <HamburgerButton onHamClick={this.hamburgerBtnHandler} />
-        <Sidebar places={this.state.locations}>
-        </Sidebar>
+        <Sidebar onCloseClick={this.closeBtnHandler} places={this.state.locations} />
         <div className="map">
           <Map locations={this.state.locations} />
         </div>
