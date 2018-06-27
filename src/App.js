@@ -10,11 +10,11 @@ class MainPage extends Component {
     locations: [
       { position: { lat: 38.418665, lng: 27.126112 }, title: 'Konak' },
       { position: { lat: 38.439018, lng: 27.141123 }, title: 'Alsancak' },
-      { position: { lat: 38.394222, lng: 27.057919 }, title: 'Balçova' },
-      { position: { lat: 38.324203, lng: 26.767730 }, title: 'Urla' }
+      { position: { lat: 38.394222, lng: 27.057919 }, title: 'Balçova' }
     ],
     query: ''
   }
+
 
   componentDidMount() {
     document.addEventListener('keyup', e => {
@@ -49,11 +49,13 @@ class MainPage extends Component {
       .classList.remove('hamburger-btn-hidden')
   }
 
+
   updateQuery = e => {
     this.setState({
       query: e.target.value
     })
   }
+
 
   render() {
     return (

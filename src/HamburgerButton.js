@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 class HamburgerButton extends Component {
   render() {
@@ -8,6 +9,10 @@ class HamburgerButton extends Component {
       </div>
     )
   }
+}
+
+HamburgerButton.propTypes = {
+  onHamClick: PropTypes.func.isRequired
 }
 
 export default HamburgerButton

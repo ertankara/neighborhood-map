@@ -7,10 +7,27 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 export class MapContainer extends Component {
+  state = {
+    activeMaker: {},
+    selectedPlace: {},
+    showingInfoWindow: false
+  }
+
+
   componentDidMount() {
     // To make the view fit all markers
     this.forceUpdate()
   }
+
+
+  onMarkerClick = (props, marker, e) => {
+    this.setState({
+      selectedPlace: props,
+      activeMaker: marker,
+      showingInfoWindow: true
+    })
+  }
+
 
   render() {
     const reg = new RegExp(this.props.queryText.toLowerCase().trim())
@@ -18,7 +35,6 @@ export class MapContainer extends Component {
 
     for (let i = 0; i < this.props.locations.length; i++) {
       bound.extend(this.props.locations[i].position)
-      console.log(bound, this.props.locations[i].position)
     }
 
     return (
@@ -34,11 +50,18 @@ export class MapContainer extends Component {
             // Print the ones that was filtered out
             .map(location => {
               return (
-                <Marker key={location.title}
+                <Marker
+                  key={location.title}
                   position={{ lat: location.position.lat, lng: location.position.lng}}
-                  title={location.title} />
+                  title={location.title}
+                  onClick={this.onMarkerClick} />
               )
             })}
+            <InfoWindow marker={this.state.activeMaker} visible={this.state.showingInfoWindow}>
+              <div>
+                <h1>{this.state.selectedPlace.title}</h1>
+              </div>
+            </InfoWindow>
         </Map>
     )
   }

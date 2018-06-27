@@ -13,6 +13,7 @@ class Sidebar extends Component {
           onQueryChange={this.props.onQueryInput}
           currentVal={this.props.currentQuery} />
         <ul>
+          {/* Filter items depending on text input first, then print them */}
           {this.props.places.filter(place => {
             return reg.test(place.title.toLowerCase())
           })
@@ -29,7 +30,9 @@ class Sidebar extends Component {
 
 Sidebar.propTypes = {
   places: PropTypes.array.isRequired,
-  onCloseClick: PropTypes.func.isRequired
+  onCloseClick: PropTypes.func.isRequired,
+  currentQuery: PropTypes.string.isRequired,
+  onQueryInput: PropTypes.func.isRequired
 }
 
 export default Sidebar
