@@ -5,7 +5,7 @@ import SearchPlaces from './SearchPlaces'
 class Sidebar extends Component {
 
   render() {
-    const reg = new RegExp(this.props.currentQuery.toLowerCase())
+    const reg = new RegExp(this.props.currentQuery.toLowerCase().trim())
     return (
       <div className="sidebar">
         <div onClick={this.props.onCloseClick} className="close-sidebar">X</div>

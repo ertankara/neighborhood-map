@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
 
 class SearchPlaces extends Component {
   render() {
@@ -13,6 +13,9 @@ class SearchPlaces extends Component {
   }
 }
 
-
+SearchPlaces.proppTypes = {
+  onQueryChange: PropTypes.func.isRequired,
+  currentVal: PropTypes.string.isRequired
+}
 
 export default SearchPlaces

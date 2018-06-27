@@ -8,7 +8,7 @@ import PropTypes from 'prop-types'
 
 export class MapContainer extends Component {
   render() {
-    const reg = new RegExp(this.props.queryText.toLowerCase())
+    const reg = new RegExp(this.props.queryText.toLowerCase().trim())
     return (
         <Map
           initialCenter={{ lat: 38.418665, lng: 27.126112, title: 'Konak' }}
@@ -32,7 +32,8 @@ export class MapContainer extends Component {
 }
 
 MapContainer.propTypes = {
-  locations: PropTypes.array.isRequired
+  locations: PropTypes.array.isRequired,
+  queryText: PropTypes.string.isRequired
 }
 
 export default GoogleApiWrapper({
