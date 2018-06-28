@@ -27,12 +27,21 @@ class MainPage extends Component {
     })
 
     // Foursquare api request
-    fetch(`https://api.foursquare.com/v2/venues/explore?near=alsancak&client_id=${Credentials.client_id}&client_secret=${Credentials.client_secret}&v=${Credentials.version_date}`)
+    fetch(`https://api.foursquare.com/v2/venues/explore?ll=38.436074,27.141488&client_id=${Credentials.client_id}&client_secret=${Credentials.client_secret}&v=${Credentials.version_date}`)
     .then(repsonse => repsonse.json())
     .then(data => {
       const locations = data.response.groups[0].items.map(item => {
+        console.log('Data: ', item)
         return {
-          position: { lat: item.venue.location.lat, lng: item.venue.location.lng }, title: item.venue.name, id: item.venue.id
+          position: { lat: item.venue.location.lat, lng: item.venue.location.lng },
+          title: item.venue.name,
+          id: item.venue.id,
+          category: item.venue.categories[0].name,
+          address: item.venue.location.address,
+          crossStreet: item.venue.location.crossStreet,
+          state: item.venue.location.state,
+          coordinates: item.venue.location.lat + ' ' + item.venue.location.lng,
+          postalCode: item.venue.location.postalCode
         }
       })
 

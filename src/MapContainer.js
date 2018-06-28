@@ -49,18 +49,32 @@ export class MapContainer extends Component {
             })
             // Print the ones that was filtered out
             .map(location => {
+              console.log('The location is: ', location)
               return (
                 <Marker
-                  key={location.title}
+                  key={location.id}
                   position={{ lat: location.position.lat, lng: location.position.lng}}
                   title={location.title}
                   onClick={this.onMarkerClick}
-                  animation={this.props.google.maps.Animation.Fo} />
+                  animation={this.props.google.maps.Animation.Fo}
+                  category={location.category}
+                  address={location.address}
+                  crossStreet={location.crossStreet}
+                  state={location.state}
+                  coordinates={location.coordinates}
+                  postalCode={location.postalCode} />
               )
             })}
             <InfoWindow marker={this.state.activeMaker} visible={this.state.showingInfoWindow}>
               <div>
                 <h1>{this.state.selectedPlace.title}</h1>
+                <h3>Category: {this.state.selectedPlace.category}</h3>
+                <p>Address: {this.state.selectedPlace.address}</p>
+                <ul>
+                  <li>State: {this.state.selectedPlace.state}</li>
+                  <li>Coordinates: {this.state.selectedPlace.coordinates}</li>
+                  <li>Postal Code: {this.state.selectedPlace.postalCode}</li>
+                </ul>
               </div>
             </InfoWindow>
         </Map>
