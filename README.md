@@ -1,5 +1,10 @@
 ## Getting up and running with the app
 
+### Your system expected to have following dependencies installed
+* Node
+* npm
+* [ yarn ]
+
 > Clone the repository
 `git clone https://github.com/hiimnew/neighborhood-map.git`
 
