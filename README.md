@@ -6,7 +6,7 @@
 > Navigate into project folder and then install dependencies
 `npm install`
 
-> Lastly run one of the following commands to run the app
+> Lastly run either yarn or npm whichever you have or prefer
 `yarn start` / `npm start`
 
 ### Dependencies
@@ -18,3 +18,10 @@
 
 Data retrieved from foursquare API and markers are created on the google maps
 depending on the foursqure response.
+
+### Service Worker
+
+Service worker is being activated in the production version
+
+> To get a production version either run yarn or npm whichever you have on your system or you prefer to use
+`yarn build` / `npm run build`
