@@ -19,7 +19,7 @@ class Sidebar extends Component {
           })
           .map((place, index) => {
             return (
-              <li className="places" key={index}>{(index + 1) + ' ' + place.title}</li>
+              <li className="places" key={index}>{(index + 1) + ') ' + place.title}</li>
             )
           })}
         </ul>

@@ -2,16 +2,13 @@ import React, { Component } from 'react'
 import Map from './MapContainer'
 import Sidebar from './Sidebar'
 import HamburgerButton from './HamburgerButton'
+import Credentials from './utils/credentials'
 
 const ESCAPE_BUTTON = 27
 
 class MainPage extends Component {
   state = {
-    locations: [
-      { position: { lat: 38.418665, lng: 27.126112 }, title: 'Konak' },
-      { position: { lat: 38.439018, lng: 27.141123 }, title: 'Alsancak' },
-      { position: { lat: 38.394222, lng: 27.057919 }, title: 'Balçova' }
-    ],
+    locations: [],
     query: ''
   }
 
@@ -27,6 +24,22 @@ class MainPage extends Component {
         document.querySelector('.hamburger-btn')
           .classList.toggle('hamburger-btn-hidden')
       }
+    })
+
+    // Foursquare api request
+    fetch(`https://api.foursquare.com/v2/venues/explore?near=alsancak&client_id=${Credentials.client_id}&client_secret=${Credentials.client_secret}&v=${Credentials.version_date}`)
+    .then(repsonse => repsonse.json())
+    .then(data => {
+      const locations = data.response.groups[0].items.map(item => {
+        return {
+          position: { lat: item.venue.location.lat, lng: item.venue.location.lng }, title: item.venue.name, id: item.venue.id
+        }
+      })
+
+      this.setState({ locations })
+    })
+    .catch(err => {
+      console.log('Failed to fetch foursquare data', err)
     })
   }
 

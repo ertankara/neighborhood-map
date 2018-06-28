@@ -34,15 +34,17 @@ html * {
 
 .sidebar {
   order: 1;
-  width: 170px;
+  width: 220px;
   position: absolute;
   z-index: 10;
-  transform: translateX(-170px);
+  transform: translateX(-220px);
   padding: 10px;
   background-color: gray;
   opacity: 0.92;
   height: 100%;
   transition: transform 0.5s;
+  overflow: scroll;
+  font-size: 0.65em;
 }
 
 
