@@ -31,7 +31,6 @@ class MainPage extends Component {
     .then(repsonse => repsonse.json())
     .then(data => {
       const locations = data.response.groups[0].items.map(item => {
-        console.log('Data: ', item)
         return {
           position: { lat: item.venue.location.lat, lng: item.venue.location.lng },
           title: item.venue.name,

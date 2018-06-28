@@ -29,6 +29,14 @@ export class MapContainer extends Component {
     })
   }
 
+  onMapClick = () => {
+    this.setState({
+      activeMaker: {},
+      selectedPlace: {},
+      showingInfoWindow: false
+    })
+  }
+
 
   render() {
     const reg = new RegExp(escaperegexp(this.props.queryText).toLowerCase().trim())
@@ -40,6 +48,7 @@ export class MapContainer extends Component {
 
     return (
         <Map
+          onClick={this.onMapClick}
           initialCenter={{ lat: 38.418665, lng: 27.126112, title: 'Konak' }}
           google={this.props.google}
           bounds={bound}>
@@ -49,7 +58,6 @@ export class MapContainer extends Component {
             })
             // Print the ones that was filtered out
             .map(location => {
-              console.log('The location is: ', location)
               return (
                 <Marker
                   key={location.id}
@@ -66,16 +74,23 @@ export class MapContainer extends Component {
               )
             })}
             <InfoWindow marker={this.state.activeMaker} visible={this.state.showingInfoWindow}>
-              <div>
-                <h1>{this.state.selectedPlace.title}</h1>
-                <h3>Category: {this.state.selectedPlace.category}</h3>
-                <p>Address: {this.state.selectedPlace.address}</p>
-                <ul>
-                  <li>State: {this.state.selectedPlace.state}</li>
-                  <li>Coordinates: {this.state.selectedPlace.coordinates}</li>
-                  <li>Postal Code: {this.state.selectedPlace.postalCode}</li>
-                </ul>
-              </div>
+              <body>
+                <header>
+                  <h1>{this.state.selectedPlace.title}</h1>
+                  <h3>Category: {this.state.selectedPlace.category}</h3>
+                </header>
+                <main>
+                  <p>Address: {this.state.selectedPlace.address}</p>
+                  <ul>
+                    <li>State: {this.state.selectedPlace.state}</li>
+                    <li>Coordinates: {this.state.selectedPlace.coordinates}</li>
+                    <li>Postal Code: {!this.state.selectedPlace.postalCode ? 'unknown' : this.state.selectedPlace.postalCode}</li>
+                  </ul>
+                </main>
+                <footer>
+                  Data provided by <a rel="noopener noreferrer" href="https://foursquare.com" target="_blank">Foursquare</a>
+                </footer>
+              </body>
             </InfoWindow>
         </Map>
     )
