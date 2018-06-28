@@ -5,6 +5,7 @@ import {
 } from 'google-maps-react'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import escaperegexp from 'escape-regexp'
 
 export class MapContainer extends Component {
   state = {
@@ -30,7 +31,7 @@ export class MapContainer extends Component {
 
 
   render() {
-    const reg = new RegExp(this.props.queryText.toLowerCase().trim())
+    const reg = new RegExp(escaperegexp(this.props.queryText).toLowerCase().trim())
     const bound = new this.props.google.maps.LatLngBounds()
 
     for (let i = 0; i < this.props.locations.length; i++) {

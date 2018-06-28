@@ -6,6 +6,7 @@ class SearchPlaces extends Component {
     return (
       <input
         onChange={this.props.onQueryChange}
+        onClick={this.props.onInputClick}
         type="text"
         placeholder="Search for places"
         value={this.props.currentVal} />
@@ -15,7 +16,8 @@ class SearchPlaces extends Component {
 
 SearchPlaces.proppTypes = {
   onQueryChange: PropTypes.func.isRequired,
-  currentVal: PropTypes.string.isRequired
+  currentVal: PropTypes.string.isRequired,
+  onInputClick: PropTypes.func.isRequired
 }
 
 export default SearchPlaces

@@ -62,6 +62,18 @@ class MainPage extends Component {
       .classList.remove('hamburger-btn-hidden')
   }
 
+  sidebarItemClick = e => {
+    this.setState({
+      query: e.target.textContent.replace(/- /g, '')
+    })
+  }
+
+  sidebarInputClick = e => {
+    this.setState({
+      query: ''
+    })
+  }
+
 
   updateQuery = e => {
     this.setState({
@@ -80,7 +92,9 @@ class MainPage extends Component {
           onCloseClick={this.closeBtnHandler}
           places={this.state.locations}
           currentQuery={this.state.query}
-          onQueryInput={this.updateQuery} />
+          onQueryInput={this.updateQuery}
+          onItemClick={this.sidebarItemClick}
+          onInputClick={this.sidebarInputClick} />
 
         <div className="map">
           <Map

@@ -1,15 +1,17 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import SearchPlaces from './SearchPlaces'
+import escaperegexp from 'escape-regexp'
 
 class Sidebar extends Component {
 
   render() {
-    const reg = new RegExp(this.props.currentQuery.toLowerCase().trim())
+    const reg = new RegExp(escaperegexp(this.props.currentQuery).toLowerCase().trim())
     return (
       <div className="sidebar">
         <div onClick={this.props.onCloseClick} className="close-sidebar">X</div>
         <SearchPlaces
+          onInputClick={this.props.onInputClick}
           onQueryChange={this.props.onQueryInput}
           currentVal={this.props.currentQuery} />
         <ul>
@@ -19,7 +21,7 @@ class Sidebar extends Component {
           })
           .map((place, index) => {
             return (
-              <li className="places" key={index}>{(index + 1) + ') ' + place.title}</li>
+              <li onClick={this.props.onItemClick} className="places" key={index}>{'- ' + place.title}</li>
             )
           })}
         </ul>
@@ -32,7 +34,9 @@ Sidebar.propTypes = {
   places: PropTypes.array.isRequired,
   onCloseClick: PropTypes.func.isRequired,
   currentQuery: PropTypes.string.isRequired,
-  onQueryInput: PropTypes.func.isRequired
+  onQueryInput: PropTypes.func.isRequired,
+  onItemClick: PropTypes.func.isRequired,
+  onInputClick: PropTypes.func.isRequired
 }
 
 export default Sidebar
