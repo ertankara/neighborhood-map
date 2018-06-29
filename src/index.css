@@ -81,19 +81,32 @@ html * {
 .close-sidebar {
   float: right;
   color: #fefefe;
-  font-size: 1.2em;
-  padding: 5px;
+  font-size: 2em;
+  padding: 9px;
   cursor: pointer;
 }
 
 
-.sidebar > input {
+.sidebar > div > input {
   width: 100%;
   height: 30px;
-  margin-top: 20px;
   margin-bottom: 20px;
 }
 
+
+
+.sidebar > div > label {
+  font-size: 1.5em;
+  color: #fff;
+}
+
+
+.sidebar > div > label,
+.sidebar > div > input,
+.sidebar > ul {
+  position: relative;
+  top: 80px;
+}
 
 .sidebar li:hover {
   text-decoration: underline;

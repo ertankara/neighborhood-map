@@ -4,7 +4,8 @@ import Sidebar from './Sidebar'
 import HamburgerButton from './HamburgerButton'
 import Credentials from './utils/credentials'
 
-const ESCAPE_BUTTON = 27
+const ESCAPE_BUTTON = 27,
+      ENTER_BUTTON = 13
 
 class MainPage extends Component {
   state = {
@@ -82,6 +83,22 @@ class MainPage extends Component {
     })
   }
 
+  sidebarItemFocus = e => {
+    document.querySelector('.hamburger-btn')
+      .classList.add('hamburger-btn-hidden')
+
+    document.querySelector('.sidebar')
+      .classList.add('sidebar-expanded')
+  }
+
+  sidebarItemKeyUp = e => {
+    if (e.keyCode === ENTER_BUTTON) {
+      this.setState({
+        query: e.target.textContent.replace(/- /g, '')
+      })
+    }
+  }
+
 
   updateQuery = e => {
     this.setState({
@@ -102,7 +119,9 @@ class MainPage extends Component {
           currentQuery={this.state.query}
           onQueryInput={this.updateQuery}
           onItemClick={this.sidebarItemClick}
-          onInputClick={this.sidebarInputClick} />
+          onInputClick={this.sidebarInputClick}
+          onItemFocus={this.sidebarItemFocus}
+          onItemKeyUp={this.sidebarItemKeyUp} />
 
         <div className="map">
           <Map

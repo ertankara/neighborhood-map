@@ -1,9 +1,10 @@
 ## Getting up and running with the app
 
 ### Your system expected to have following dependencies installed
-* Node
+* Node.js
 * npm
 * [ yarn ]
+* Git
 
 > Clone the repository
 `git clone https://github.com/hiimnew/neighborhood-map.git`
@@ -11,7 +12,7 @@
 > Navigate into project folder and then install dependencies
 `npm install`
 
-> Lastly run either yarn or npm whichever you have or prefer
+> Lastly run either yarn or npm whichever you have on your system or you prefer
 `yarn start` / `npm start`
 
 ### Dependencies

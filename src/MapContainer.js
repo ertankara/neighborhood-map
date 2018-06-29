@@ -16,7 +16,7 @@ export class MapContainer extends Component {
 
 
   componentDidMount() {
-    // To make the view fit all markers
+    // To make the view fit all markers on first load
     this.forceUpdate()
   }
 
@@ -48,6 +48,7 @@ export class MapContainer extends Component {
 
     return (
         <Map
+          role="application"
           onClick={this.onMapClick}
           initialCenter={{ lat: 38.418665, lng: 27.126112, title: 'Konak' }}
           google={this.props.google}
@@ -77,14 +78,15 @@ export class MapContainer extends Component {
               <body>
                 <header>
                   <h1>{this.state.selectedPlace.title}</h1>
-                  <h3>Category: {this.state.selectedPlace.category}</h3>
+                  <h3><label htmlFor="category">Category</label>: <span id="category">{!this.state.selectedPlace.category ? 'N/A' : this.state.selectedPlace.category}</span></h3>
                 </header>
                 <main>
-                  <p>Address: {this.state.selectedPlace.address}</p>
+                  <p><label htmlFor="address">Address</label>: <span id="address">{!this.state.selectedPlace.address ? 'N/A' : this.state.selectedPlace.address}</span></p>
                   <ul>
-                    <li>State: {this.state.selectedPlace.state}</li>
-                    <li>Coordinates: {this.state.selectedPlace.coordinates}</li>
-                    <li>Postal Code: {!this.state.selectedPlace.postalCode ? 'unknown' : this.state.selectedPlace.postalCode}</li>
+                    <li><label htmlFor="cross-street">Cross Street</label>: <span id="cross-street">{!this.state.selectedPlace.crossStreet ? 'N/A' : this.state.selectedPlace.crossStreet}</span></li>
+                    <li><label htmlFor="state">State</label>: <span id="state">{!this.state.selectedPlace.state ? 'N/A' : this.state.selectedPlace.state}</span></li>
+                    <li><label htmlFor="coords">Coordinates</label>: <span id="coords">{this.state.selectedPlace.coordinates}</span></li>
+                    <li><label htmlFor="postal-code">Postal Code</label>: <span id="postal-code">{!this.state.selectedPlace.postalCode ? 'N/A' : this.state.selectedPlace.postalCode}</span></li>
                   </ul>
                 </main>
                 <footer>

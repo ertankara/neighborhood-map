@@ -21,7 +21,7 @@ class Sidebar extends Component {
           })
           .map((place, index) => {
             return (
-              <li onClick={this.props.onItemClick} className="places" key={index}>{'- ' + place.title}</li>
+              <li tabIndex="0" onKeyUp={this.props.onKeyUp} onFocus={this.props.onItemFocus} onClick={this.props.onItemClick} className="places" key={index}>{'- ' + place.title}</li>
             )
           })}
         </ul>
@@ -36,7 +36,9 @@ Sidebar.propTypes = {
   currentQuery: PropTypes.string.isRequired,
   onQueryInput: PropTypes.func.isRequired,
   onItemClick: PropTypes.func.isRequired,
-  onInputClick: PropTypes.func.isRequired
+  onInputClick: PropTypes.func.isRequired,
+  onItemFocus: PropTypes.func.isRequired,
+  onItemKeyUp: PropTypes.func.isRequired
 }
 
 export default Sidebar
