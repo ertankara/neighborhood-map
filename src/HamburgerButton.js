@@ -1,14 +1,12 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
-class HamburgerButton extends Component {
-  render() {
+function HamburgerButton(props) {
     return (
-      <div onClick={this.props.onHamClick} className="hamburger-btn">
+      <div onClick={props.onHamClick} className="hamburger-btn">
         𝄘
       </div>
     )
-  }
 }
 
 HamburgerButton.propTypes = {

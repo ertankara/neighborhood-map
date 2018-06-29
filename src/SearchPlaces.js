@@ -1,22 +1,20 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
-class SearchPlaces extends Component {
-  render() {
+function SearchPlaces(props) {
     return (
       // <label>Search for a place
       <div>
         <label htmlFor="search-venue">Search for a venue</label>
         <input
           id="search-venue"
-          onChange={this.props.onQueryChange}
-          onClick={this.props.onInputClick}
+          onChange={props.onQueryChange}
+          onClick={props.onInputClick}
           type="text"
           placeholder="Search..."
-          value={this.props.currentVal} />
+          value={props.currentVal} />
       </div>
     )
-  }
 }
 
 SearchPlaces.proppTypes = {

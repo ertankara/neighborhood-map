@@ -1,16 +1,19 @@
-import React, { Component } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 
-class KeyboardHints extends Component {
-  render() {
+function KeyboardHints(props) {
     return (
-      <div onBlur={this.props.onFocusLoss} tabIndex="1" className="hints">
+      <div onBlur={props.onFocusLoss} tabIndex="1" className="hints">
         <ul>
           <li>Use <strong>escape</strong> button to switch on and off sidebar</li>
           <li>Use <strong>enter</strong> key to select a place in the list</li>
         </ul>
       </div>
     )
-  }
+}
+
+KeyboardHints.porpTypes = {
+  onFocusLoss: PropTypes.func.isRequired
 }
 
 export default KeyboardHints

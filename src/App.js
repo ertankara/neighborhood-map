@@ -3,6 +3,7 @@ import Map from './MapContainer'
 import Sidebar from './Sidebar'
 import HamburgerButton from './HamburgerButton'
 import KeyboardHints from './KeyboardHints'
+import DetailsView from './DetailsView'
 import Credentials from './utils/credentials'
 
 const ESCAPE_BUTTON = 27,
@@ -11,6 +12,7 @@ const ESCAPE_BUTTON = 27,
 class MainPage extends Component {
   state = {
     locations: [],
+    venueInfo: {},
     query: ''
   }
 
@@ -78,15 +80,28 @@ class MainPage extends Component {
   }
 
   sidebarItemClick = e => {
+    // Eliminate other markers that don't match with the string expression
     this.setState({
       query: e.target.textContent.replace(/- /g, '')
     })
+
+    // Search for the clikced location and retrieve the data
+    for (const location of this.state.locations) {
+      if (location.title === e.target.textContent.replace(/- /g, '')) {
+        this.setState({ venueInfo: location })
+        document.querySelector('.details-view')
+          .style.opacity = '1';
+      }
+    }
   }
 
   sidebarInputClick = e => {
     this.setState({
       query: ''
     })
+
+    document.querySelector('.details-view')
+      .style.opacity = '0'
   }
 
   sidebarItemFocus = e => {
@@ -106,10 +121,13 @@ class MainPage extends Component {
   }
 
   hintsLoseFocus = e => {
-    console.log('Least I\'m here')
     e.target.style.display = 'none';
   }
 
+  detailsCloseButton = e => {
+    document.querySelector('.details-view')
+      .style.opacity = '0'
+  }
 
   updateQuery = e => {
     this.setState({
@@ -122,6 +140,10 @@ class MainPage extends Component {
     return (
       <div className="app">
         <KeyboardHints onFocusLoss={this.hintsLoseFocus} />
+
+        <DetailsView
+          venueInfo={this.state.venueInfo}
+          closeDetailsView={this.detailsCloseButton} />
 
         <HamburgerButton
           onHamClick={this.hamburgerBtnHandler} />
