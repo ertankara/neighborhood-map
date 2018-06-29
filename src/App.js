@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Map from './MapContainer'
 import Sidebar from './Sidebar'
 import HamburgerButton from './HamburgerButton'
+import KeyboardHints from './KeyboardHints'
 import Credentials from './utils/credentials'
 
 const ESCAPE_BUTTON = 27,
@@ -27,6 +28,11 @@ class MainPage extends Component {
       }
     })
 
+    setTimeout(() => {
+      document.querySelector('.hints')
+        .style.opacity = '0';
+    }, 9500)
+
     // Foursquare api request
     fetch(`https://api.foursquare.com/v2/venues/explore?ll=38.436074,27.141488&client_id=${Credentials.client_id}&client_secret=${Credentials.client_secret}&v=${Credentials.version_date}`)
     .then(repsonse => repsonse.json())
@@ -40,7 +46,7 @@ class MainPage extends Component {
           address: item.venue.location.address,
           crossStreet: item.venue.location.crossStreet,
           state: item.venue.location.state,
-          coordinates: item.venue.location.lat + ' ' + item.venue.location.lng,
+          coordinates: item.venue.location.lat + ', ' + item.venue.location.lng,
           postalCode: item.venue.location.postalCode
         }
       })
@@ -99,6 +105,11 @@ class MainPage extends Component {
     }
   }
 
+  hintsLoseFocus = e => {
+    console.log('Least I\'m here')
+    e.target.style.display = 'none';
+  }
+
 
   updateQuery = e => {
     this.setState({
@@ -110,6 +121,8 @@ class MainPage extends Component {
   render() {
     return (
       <div className="app">
+        <KeyboardHints onFocusLoss={this.hintsLoseFocus} />
+
         <HamburgerButton
           onHamClick={this.hamburgerBtnHandler} />
 

@@ -9,7 +9,7 @@ class Sidebar extends Component {
     const reg = new RegExp(escaperegexp(this.props.currentQuery).toLowerCase().trim())
     return (
       <div className="sidebar">
-        <div onClick={this.props.onCloseClick} className="close-sidebar">X</div>
+        <button onFocus={this.props.onItemFocus} aria-label="Close sidebar" onClick={this.props.onCloseClick} className="close-sidebar">X</button>
         <SearchPlaces
           onInputClick={this.props.onInputClick}
           onQueryChange={this.props.onQueryInput}
@@ -21,7 +21,12 @@ class Sidebar extends Component {
           })
           .map((place, index) => {
             return (
-              <li tabIndex="0" onKeyUp={this.props.onKeyUp} onFocus={this.props.onItemFocus} onClick={this.props.onItemClick} className="places" key={index}>{'- ' + place.title}</li>
+              <li
+                tabIndex="0"
+                onKeyUp={this.props.onItemKeyUp}
+                onFocus={this.props.onItemFocus}
+                onClick={this.props.onItemClick}
+                key={index}>{'- ' + place.title}</li>
             )
           })}
         </ul>

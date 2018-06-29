@@ -32,6 +32,24 @@ html * {
 }
 
 
+.hamburger-btn {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  z-index: 15;
+  left: 10px;
+  top: 80px;
+  font-size: 2.7em;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+
+.hamburger-btn-hidden {
+  display: none;
+}
+
+
 .sidebar {
   order: 1;
   width: 220px;
@@ -53,34 +71,9 @@ html * {
 }
 
 
-.places {
-  font-size: 1.2em;
-  color: #fefefe;
-  line-height: 2.3em;
-}
-
-
-.hamburger-btn {
-  width: 30px;
-  height: 30px;
-  position: absolute;
-  z-index: 15;
-  left: 10px;
-  top: 80px;
-  font-size: 2.7em;
-  font-weight: 900;
-  cursor: pointer;
-}
-
-
-.hamburger-btn-hidden {
-  display: none;
-}
-
-
 .close-sidebar {
   float: right;
-  color: #fefefe;
+  color: #343434;
   font-size: 2em;
   padding: 9px;
   cursor: pointer;
@@ -94,10 +87,11 @@ html * {
 }
 
 
-
 .sidebar > div > label {
-  font-size: 1.5em;
+  font-size: 1.4em;
   color: #fff;
+  display: block;
+  width: 100%;
 }
 
 
@@ -108,7 +102,34 @@ html * {
   top: 80px;
 }
 
+
+.sidebar li {
+  font-size: 1.2em;
+  color: #fefefe;
+  line-height: 2.3em;
+}
+
+
 .sidebar li:hover {
   text-decoration: underline;
   cursor: pointer;
+}
+
+
+.hints {
+  position: absolute;
+  z-index: 15;
+  top: 100px;
+  left: 20%;
+  width: 260px;
+  height: 160px;
+  padding: 10px;
+  line-height: 1.6em;
+  background-color: #073590;
+  color: #acfb1d;
+  transition: opacity 0.5s;
+}
+
+.hints > ul {
+  list-style-type: none;
 }

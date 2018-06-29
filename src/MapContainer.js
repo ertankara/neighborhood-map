@@ -78,15 +78,15 @@ export class MapContainer extends Component {
               <body>
                 <header>
                   <h1>{this.state.selectedPlace.title}</h1>
-                  <h3><label htmlFor="category">Category</label>: <span id="category">{!this.state.selectedPlace.category ? 'N/A' : this.state.selectedPlace.category}</span></h3>
+                  <h3><span aria-describedby="category">Category</span>: <span id="category">{!this.state.selectedPlace.category ? 'N/A' : this.state.selectedPlace.category}</span></h3>
                 </header>
                 <main>
-                  <p><label htmlFor="address">Address</label>: <span id="address">{!this.state.selectedPlace.address ? 'N/A' : this.state.selectedPlace.address}</span></p>
+                  <p><span aria-describedby="address">Address</span>: <span id="address">{!this.state.selectedPlace.address ? 'N/A' : this.state.selectedPlace.address}</span></p>
                   <ul>
-                    <li><label htmlFor="cross-street">Cross Street</label>: <span id="cross-street">{!this.state.selectedPlace.crossStreet ? 'N/A' : this.state.selectedPlace.crossStreet}</span></li>
-                    <li><label htmlFor="state">State</label>: <span id="state">{!this.state.selectedPlace.state ? 'N/A' : this.state.selectedPlace.state}</span></li>
-                    <li><label htmlFor="coords">Coordinates</label>: <span id="coords">{this.state.selectedPlace.coordinates}</span></li>
-                    <li><label htmlFor="postal-code">Postal Code</label>: <span id="postal-code">{!this.state.selectedPlace.postalCode ? 'N/A' : this.state.selectedPlace.postalCode}</span></li>
+                    <li><span aria-describedby="cross-street">Cross Street</span>: <span id="cross-street">{!this.state.selectedPlace.crossStreet ? 'N/A' : this.state.selectedPlace.crossStreet}</span></li>
+                    <li><span aria-describedby="state">State</span>: <span id="state">{!this.state.selectedPlace.state ? 'N/A' : this.state.selectedPlace.state}</span></li>
+                    <li><span aria-describedby="coords">Coordinates</span>: <span id="coords">{this.state.selectedPlace.coordinates}</span></li>
+                    <li><span aria-describedby="postal-code">Postal Code</span>: <span id="postal-code">{!this.state.selectedPlace.postalCode ? 'N/A' : this.state.selectedPlace.postalCode}</span></li>
                   </ul>
                 </main>
                 <footer>
