@@ -21,7 +21,7 @@ function DetailsView(props) {
         <li><span aria-describedby="detais-postal-code">Postal Code</span>: <span className="data" id="details-postal-code">{!data.postalCode ? 'N/A' : data.postalCode}</span></li>
       </ul>
       <br />
-      <p>Data provided by <a href="https://foursquare.com" target="_blank">Foursquare</a></p>
+      <p>Data provided by <a rel="noopener noreferrer" href="https://foursquare.com" target="_blank">Foursquare</a></p>
     </div>
   )
 }

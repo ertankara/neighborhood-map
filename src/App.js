@@ -5,6 +5,7 @@ import HamburgerButton from './HamburgerButton'
 import KeyboardHints from './KeyboardHints'
 import DetailsView from './DetailsView'
 import Credentials from './utils/credentials'
+import FailureWindow from './FailureWindow'
 
 const ESCAPE_BUTTON = 27,
       ENTER_BUTTON = 13
@@ -13,6 +14,7 @@ class MainPage extends Component {
   state = {
     locations: [],
     venueInfo: {},
+    fourSquareCrash: false,
     query: ''
   }
 
@@ -31,13 +33,13 @@ class MainPage extends Component {
     })
 
     setTimeout(() => {
-      document.querySelector('.hints')
-        .style.opacity = '0';
+      if (document.querySelector('.hints'))
+        document.querySelector('.hints').style.opacity = '0'
     }, 9500)
 
     // Foursquare api request
     fetch(`https://api.foursquare.com/v2/venues/explore?ll=38.436074,27.141488&client_id=${Credentials.client_id}&client_secret=${Credentials.client_secret}&v=${Credentials.version_date}`)
-    .then(repsonse => repsonse.json())
+    .then(response => response.json())
     .then(data => {
       const locations = data.response.groups[0].items.map(item => {
         return {
@@ -56,7 +58,10 @@ class MainPage extends Component {
       this.setState({ locations })
     })
     .catch(err => {
-      console.log('Failed to fetch foursquare data', err)
+      this.setState({
+        fourSquareCrash: true
+      })
+      console.log('Foursquare error:', err)
     })
   }
 
@@ -85,12 +90,13 @@ class MainPage extends Component {
       query: e.target.textContent.replace(/- /g, '')
     })
 
+    const detailsView = document.querySelector('.details-view')
     // Search for the clikced location and retrieve the data
     for (const location of this.state.locations) {
       if (location.title === e.target.textContent.replace(/- /g, '')) {
         this.setState({ venueInfo: location })
-        document.querySelector('.details-view')
-          .style.opacity = '1';
+        detailsView.style.display = 'block'
+        detailsView.style.opacity = '1'
       }
     }
   }
@@ -100,8 +106,13 @@ class MainPage extends Component {
       query: ''
     })
 
-    document.querySelector('.details-view')
-      .style.opacity = '0'
+    const detailsView = document.querySelector('.details-view')
+
+    detailsView.style.opacity = '0'
+
+    setTimeout(() => {
+      detailsView.style.display = 'none'
+    }, 500)
   }
 
   sidebarItemFocus = e => {
@@ -117,16 +128,31 @@ class MainPage extends Component {
       this.setState({
         query: e.target.textContent.replace(/- /g, '')
       })
+
+      const detailsView = document.querySelector('.details-view')
+
+      for (const location of this.state.locations) {
+        if (location.title === e.target.textContent.replace(/- /g, '')) {
+          this.setState({ venueInfo: location })
+          detailsView.style.display = 'block'
+          detailsView.style.opacity = '1'
+
+        }
+      }
     }
   }
 
   hintsLoseFocus = e => {
-    e.target.style.display = 'none';
+    e.target.style.display = 'none'
   }
 
   detailsCloseButton = e => {
-    document.querySelector('.details-view')
-      .style.opacity = '0'
+    const detailsView = document.querySelector('.details-view')
+
+    detailsView.style.opacity = '0'
+    setTimeout(() => {
+      detailsView.style.display = 'none'
+    }, 500)
   }
 
   updateQuery = e => {
@@ -139,30 +165,35 @@ class MainPage extends Component {
   render() {
     return (
       <div className="app">
-        <KeyboardHints onFocusLoss={this.hintsLoseFocus} />
+          <div>
+            {this.state.fourSquareCrash && <FailureWindow />}
 
-        <DetailsView
-          venueInfo={this.state.venueInfo}
-          closeDetailsView={this.detailsCloseButton} />
+            {/* Display hints if the app loads properly */}
+            {!this.state.fourSquareCrash && <KeyboardHints onFocusLoss={this.hintsLoseFocus} />}
 
-        <HamburgerButton
-          onHamClick={this.hamburgerBtnHandler} />
+            <DetailsView
+              venueInfo={this.state.venueInfo}
+              closeDetailsView={this.detailsCloseButton} />
 
-        <Sidebar
-          onCloseClick={this.closeBtnHandler}
-          places={this.state.locations}
-          currentQuery={this.state.query}
-          onQueryInput={this.updateQuery}
-          onItemClick={this.sidebarItemClick}
-          onInputClick={this.sidebarInputClick}
-          onItemFocus={this.sidebarItemFocus}
-          onItemKeyUp={this.sidebarItemKeyUp} />
+            <HamburgerButton
+              onHamClick={this.hamburgerBtnHandler} />
 
-        <div className="map">
-          <Map
-            queryText={this.state.query}
-            locations={this.state.locations} />
-        </div>
+            <Sidebar
+              onCloseClick={this.closeBtnHandler}
+              places={this.state.locations}
+              currentQuery={this.state.query}
+              onQueryInput={this.updateQuery}
+              onItemClick={this.sidebarItemClick}
+              onInputClick={this.sidebarInputClick}
+              onItemFocus={this.sidebarItemFocus}
+              onItemKeyUp={this.sidebarItemKeyUp} />
+
+            <div className="map">
+              <Map
+                queryText={this.state.query}
+                locations={this.state.locations} />
+            </div>
+          </div>
       </div>
     )
   }

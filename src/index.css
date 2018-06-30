@@ -173,3 +173,18 @@ html * {
   border: none;
   color: #eee7e7;
 }
+
+
+.failure-window {
+  display: block;
+  position: absolute;
+  border-radius: 10px;
+  z-index: 15;
+  left: 20%;
+  top : 15%;
+  width: 270px;
+  height: fit-content;
+  padding: 20px;
+  background-color: #2379be;
+  color: #69e674
+}
