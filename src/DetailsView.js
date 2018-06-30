@@ -27,7 +27,8 @@ function DetailsView(props) {
 }
 
 DetailsView.propTypes = {
-  venueInfo: PropTypes.object.isRequired
+  venueInfo: PropTypes.object.isRequired,
+  closeDetailsView: PropTypes.func.isRequired
 }
 
 export default DetailsView

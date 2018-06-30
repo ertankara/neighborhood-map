@@ -1,7 +1,6 @@
 import React from 'react'
 
 function FailureWindow(props) {
-  console.log('It was alright until you came')
   return (
     <div role="alert" className="failure-window">
       <p>
